@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth"
 
 // hooks
 import { useState, useEffect } from "react"
-import { userAuthentication } from "./hooks/userAuthentication"
+import { useAuthentication } from "./hooks/useAuthentication"
 
 // pages
 import Home from "./pages/Home/Home"
@@ -27,7 +27,7 @@ import { AuthProvider } from "./context/AuthContext"
 
 function App() {
   const [user, setUser] = useState(undefined)
-  const { auth } = userAuthentication()
+  const { auth } = useAuthentication()
 
   const loadingUser = user === undefined
 

@@ -1,17 +1,17 @@
 import { useState, useEffect, useReducer } from "react";
 import { db } from "../lib/firebase/config";
-import { doc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 const initialState = {
   loading: null,
   error: null,
 };
 
-const deleteReducer = (state, action) => {
+const insertReducer = (state, action) => {
   switch (action.type) {
     case "LOADING":
       return { loading: true, error: null };
-    case "DELETED_DOC":
+    case "INSERTED_DOC":
       return { loading: false, error: null };
     case "ERROR":
       return { loading: false, error: action.payload };
@@ -20,8 +20,8 @@ const deleteReducer = (state, action) => {
   }
 };
 
-export const userDeleteDocument = (docCollection) => {
-  const [response, dispatch] = useReducer(deleteReducer, initialState);
+export const useInsertDocument = (docCollection) => {
+  const [response, dispatch] = useReducer(insertReducer, initialState);
 
   // deal with memory leak
   const [cancelled, setCancelled] = useState(false);
@@ -32,15 +32,20 @@ export const userDeleteDocument = (docCollection) => {
     }
   };
 
-  const deleteDocument = async (id) => {
+  const insertDocument = async (document) => {
     checkCancelBeforeDispatch({ type: "LOADING" });
 
     try {
-      const deletedDocument = await deleteDoc(doc(db, docCollection, id));
+      const newDocument = { ...document, createdAt: Timestamp.now() };
+
+      const insertedDocument = await addDoc(
+        collection(db, docCollection),
+        newDocument
+      );
 
       checkCancelBeforeDispatch({
-        type: "DELETED_DOC",
-        payload: deletedDocument,
+        type: "INSERTED_DOC",
+        payload: insertedDocument,
       });
     } catch (error) {
       checkCancelBeforeDispatch({ type: "ERROR", payload: error.message });
@@ -51,5 +56,5 @@ export const userDeleteDocument = (docCollection) => {
     return () => setCancelled(true);
   }, []);
 
-  return { deleteDocument, response };
+  return { insertDocument, response };
 };
