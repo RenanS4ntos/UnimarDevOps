@@ -2,12 +2,12 @@
 import styles from "./Post.module.css"
 
 // hooks
-import { userFetchDocument } from "../../hooks/userFetchDocument"
+import { useFetchDocument } from "../../hooks/useFetchDocument"
 import { useParams } from "react-router-dom"
 
 const Post = () => {
   const { id } = useParams()
-  const { document: post } = userFetchDocument("posts", id)
+  const { document: post } = useFetchDocument("posts", id)
 
   return (
     <div className={styles.post_container}>

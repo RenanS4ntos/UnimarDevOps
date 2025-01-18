@@ -2,13 +2,12 @@ import styles from "./EditPost.module.css"
 
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { useAuthValue } from "../../context/AuthContext"
-import { userFetchDocument } from "../../hooks/userFetchDocument"
-import { userUpdateDocument } from "../../hooks/userUpdateDocument"
+import { useFetchDocument } from "../../hooks/useFetchDocument"
+import { useUpdateDocument } from "../../hooks/useUpdateDocument"
 
 const EditPost = () => {
   const { id } = useParams()
-  const { document: post } = userFetchDocument("posts", id)
+  const { document: post } = useFetchDocument("posts", id)
 
   console.log(post)
 
@@ -31,11 +30,9 @@ const EditPost = () => {
     }
   }, [post])
 
-  const { user } = useAuthValue()
-
   const navigate = useNavigate()
 
-  const { updateDocument, response } = userUpdateDocument("posts")
+  const { updateDocument, response } = useUpdateDocument("posts")
 
   const handleSubmit = (e) => {
     e.preventDefault()

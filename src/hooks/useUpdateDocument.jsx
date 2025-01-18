@@ -20,7 +20,7 @@ const updateReducer = (state, action) => {
   }
 };
 
-export const userUpdateDocument = (docCollection) => {
+export const useUpdateDocument = (docCollection) => {
   const [response, dispatch] = useReducer(updateReducer, initialState);
 
   // deal with memory leak

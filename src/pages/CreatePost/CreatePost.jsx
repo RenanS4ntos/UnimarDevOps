@@ -1,7 +1,7 @@
 import styles from "./CreatePost.module.css"
 
 import { useState } from "react"
-import { userInsertDocument } from "../../hooks/userInsertDocument"
+import { useInsertDocument } from "../../hooks/useInsertDocument"
 import { useNavigate } from "react-router-dom"
 import { useAuthValue } from "../../context/AuthContext"
 
@@ -16,7 +16,7 @@ const CreatePost = () => {
 
   const navigate = useNavigate()
 
-  const { insertDocument, response } = userInsertDocument("posts")
+  const { insertDocument, response } = useInsertDocument("posts")
 
   const handleSubmit = (e) => {
     e.preventDefault()
