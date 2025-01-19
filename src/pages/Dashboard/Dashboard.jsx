@@ -23,7 +23,10 @@ const Dashboard = () => {
   }, [documents]);
 
   async function deleteDocumentById(id) {
-    await deleteDocument(id);
+    await deleteDocument(id).then(() => {
+      console.log("Document deleted successfully");
+      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
+    });
   }
 
   return (
