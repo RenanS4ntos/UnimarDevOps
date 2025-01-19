@@ -40,15 +40,17 @@ const Dashboard = () => {
           <div className={styles.post_row} key={post.id}>
             <p>{post.title}</p>
             <div className={styles.actions}>
-              <Link to={`/posts/${post.id}`} className="btn btn-outline">
+              <Link to={`/posts/${post.id}`} className={styles.link_visualize_item}>
                 Ver
               </Link>
-              <Link to={`/posts/edit/${post.id}`} className="btn btn-outline">
-                Editar
+              <Link to={`/posts/edit/${post.id}`}>
+                <button type="button" className={styles.button_success}>
+                  Editar
+                </button>
               </Link>
               <button
                 onClick={() => deleteDocument(post.id)}
-                className="btn btn-outline btn-danger"
+                className={styles.button_danger}
               >
                 Excluir
               </button>
