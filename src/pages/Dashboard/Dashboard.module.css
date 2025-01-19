@@ -98,4 +98,9 @@
   &:hover {
     opacity: 0.6;
   }
+  &:disabled {
+    background-color:rgb(255, 83, 83);
+    color: #fff;
+    cursor: not-allowed;
+  }
 }

@@ -1,21 +1,30 @@
 import styles from "./Dashboard.module.css";
 
 import { Link } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 import { useAuthValue } from "../../hooks/useAuthValue";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 import { useDeleteDocument } from "../../hooks/useDeleteDocument";
 
 const Dashboard = () => {
+  const [posts, setPosts] = useState(null);
+
   const { user } = useAuthValue();
   const uid = user.uid;
 
-  const { documents: posts } = useFetchDocuments("posts", null, uid);
+  const { documents } = useFetchDocuments("posts", null, uid);
 
-  const { deleteDocument } = useDeleteDocument("posts");
+  const { deleteDocument, deleting } = useDeleteDocument("posts");
 
-  console.log(uid);
-  console.log(posts);
+  useEffect(() => {
+    if (documents) {
+      setPosts(documents);
+    }
+  }, [documents]);
+
+  async function deleteDocumentById(id) {
+    await deleteDocument(id);
+  }
 
   return (
     <div className={styles.dashboard}>
@@ -49,10 +58,11 @@ const Dashboard = () => {
                 </button>
               </Link>
               <button
-                onClick={() => deleteDocument(post.id)}
+                onClick={() => deleteDocumentById(post.id)}
                 className={styles.button_danger}
+                disabled={deleting}
               >
-                Excluir
+                {deleting ? "Excluindo..." : "Excluir"}
               </button>
             </div>
           </div>
