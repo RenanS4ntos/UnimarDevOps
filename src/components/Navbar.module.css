@@ -6,8 +6,19 @@
   padding: 0.5em 2em;
 }
 
+.container_brand {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.container_brand strong {
+  font-size: 1em;
+  margin-top: 0.5em;
+}
+
 .brand {
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
 
 .brand span {

@@ -1,21 +1,32 @@
-import { NavLink } from "react-router-dom"
-import { useAuthentication } from "../hooks/useAuthentication"
-import { useAuthValue } from "../hooks/useAuthValue"
-import styles from "./Navbar.module.css"
-import sair from "../../public/exit-svgrepo-com.svg"
-import logo from "./../../public/logoDevBlog.png"
+import { NavLink } from "react-router-dom";
+import { useAuthentication } from "../hooks/useAuthentication";
+import { useAuthValue } from "../hooks/useAuthValue";
+import styles from "./Navbar.module.css";
+import sair from "../../public/exit-svgrepo-com.svg";
+import logo from "./../../public/logoDevBlog.png";
 
 const Navbar = () => {
-  const { logout } = useAuthentication()
-  const { user } = useAuthValue()
-  console.log(user)
+  const { logout } = useAuthentication();
+  const { user } = useAuthValue();
+  console.log(user);
+
   return (
     <nav className={styles.navbar}>
-      <NavLink className={styles.brand} to="/">
-        <div>
-          <img src={logo} alt="Brand" width="50px" height="30px" /> Mini <span>Blog</span>
-        </div>
-      </NavLink>
+      <div className={styles.container_brand}>
+        <NavLink className={styles.brand} to="/">
+          <img src={logo} alt="Brand" width="50px" height="30px" /> Mini{" "}
+          <span>Blog</span>
+        </NavLink>
+
+        {user && (
+          <>
+            <strong>Olá, {user.displayName}!</strong>
+            <span style={{ marginTop: 4, marginLeft: 40 }}>
+              Usuário autenticado: {user.email} ✅
+            </span>
+          </>
+        )}
+      </div>
       <ul className={styles.links_list}>
         <li>
           <NavLink
