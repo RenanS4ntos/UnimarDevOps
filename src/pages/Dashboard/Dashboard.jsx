@@ -2,7 +2,7 @@ import styles from "./Dashboard.module.css";
 
 import { Link } from "react-router-dom";
 
-import { useAuthValue } from "../../context/AuthContext";
+import { useAuthValue } from "../../hooks/useAuthValue";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 import { useDeleteDocument } from "../../hooks/useDeleteDocument";
 

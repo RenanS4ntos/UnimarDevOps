@@ -1,11 +1,11 @@
-import { useContext, createContext } from "react"
+/* eslint-disable react/prop-types */
 
-const AuthContext = createContext()
+import { createContext } from "react"
 
-export function AuthProvider({children, value}){
-    return<AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-}
+export const AuthContext = createContext()
 
-export function useAuthValue(){
-    return useContext(AuthContext)
+export function AuthProvider(props){
+    const { children, value } = props
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
