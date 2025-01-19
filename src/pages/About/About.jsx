@@ -9,7 +9,7 @@ const About = () => {
         Sobre o Mini <span>Blog</span>Developer
       </h2>
       <p>
-        Projeto criado para servir como base para aprendizagem de React, no terceiro semestre do curso de Desenvolvimento de Sistemas da Fatec Matão
+        Projeto criado para servir como base para aprendizagem de React, Firebase e outras tecnologias.
       </p>
       <Link to="/posts/create" className="btn">
         Criar post
